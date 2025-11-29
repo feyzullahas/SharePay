@@ -1,98 +1,100 @@
-Merkezi Olmayan Ortaklık Finansmanı ve Yönetimi
+Decentralized Partnership Financing & Management
 
-Blockchain tabanlı bu sistem, işletme ortakları arasındaki gelir, gider ve borç yönetimini otomatikleştirerek muhasebe hatalarını, güven problemlerini ve manuel mutabakat ihtiyacını ortadan kaldırır.
-Stellar & Soroban altyapısı kullanılarak ortaklık yapıları şeffaf, hızlı ve güvenli şekilde yönetilir.
+This blockchain-based system automates income, expense, and liability management between business partners — eliminating accounting errors, trust issues, and the need for manual reconciliation.
+Using Stellar & Soroban, partnership structures become transparent, fast, and secure.
 
-🚀 Proje Özeti
+🚀 Project Overview
 
-Bu platform;
-Ortaklık paylarını tokenlaştırır,
-Gider & borçları akıllı sözleşmeler üzerinden otomatik bölüştürür,
-Kazancı ortaklara anlık olarak dağıtır,
-Tüm finansal hareketleri blok zinciri üzerinde doğrulanabilir biçimde kaydeder.
-İşletmeler için tamamen merkeziyetsiz bir ortaklık yönetim altyapısı sunar.
+This platform:
+Tokenizes partnership shares
+Automatically splits expenses & liabilities via smart contracts
+Distributes profit to partners instantly
+Records all financial operations on the blockchain in a fully verifiable way
+It provides a fully decentralized infrastructure for partnership management.
 
-🔗 1. Ortaklık Finansal Akışının Mimari Özellikleri
+🔗 1. Architecture of the Partnership Financial Flow
+🏦 Main Treasury (Vault)
+The account where all major funds are stored
+Expenses require multisig approval
+Secured via Stellar Multisig
 
-🏦 Ana Hazine (Kasa)
-Tüm büyük fonların tutulduğu hesap.
-Harcamalar çoklu imza (multisig) ile onaylanır.
-Stellar Multisig ile güvence altına alınır.
+🎫 Partnership Share (Tokenization)
+Partnership ownership is represented by the XYZ-PAY token
+Each token defines ownership percentage and financial responsibility
+Issued through Stellar Asset Issuance
 
-🎫 Ortaklık Payı (Tokenizasyon)
-Ortaklık payları XYZ-PAY adlı token ile temsil edilir.
-Her token, mülkiyet yüzdesini ve finansal sorumluluğu belirler.
-Asset Issuance mekanizmasıyla ihraç edilir.
+📘 Expense & Liability Management
+Expenses and liabilities are recorded in a Soroban Smart Contract Ledger
+The contract automatically calculates each partner’s share
+Full on-chain reconciliation without manual effort
 
-📘 Gider & Borç Yönetimi
-Borç ve giderler bir Soroban Akıllı Sözleşmesi içindeki Borç Kayıt Defterine işlenir.
-Sözleşme otomatik mutabakat yapar ve her ortağa düşen payı hesaplar.
+💸 2. Automatic Expense & Liability Distribution (Liability Pro-Rata)
+A) Automatic Expense Allocation
+An expense is defined (e.g., 100 XLM electricity bill)
+A Soroban contract is triggered when the payment occurs
+Token share percentages determine each partner’s portion
+Each partner’s wallet is charged or assigned a liability entry
 
-💸 2. Gider ve Borçların Otomatik Bölüştürülmesi (Liability Pro-Rata)
+B) Liability Recording
+Loans or credit installments (principal + interest) are logged in the contract
+When due, liabilities are automatically split according to share percentages
 
-A) Giderlerin Otomatik Kesilmesi
-Gider tanımlanır (ör. 100 XLM elektrik faturası).
-Ödeme yapılınca Soroban sözleşmesi tetiklenir.
-Ortaklık token oranına göre paylar hesaplanır.
-Her ortağın cüzdanından kesim talebi hazırlanır veya borç olarak işlenir.
+✅ 3. Automatic Profit Distribution
+Revenue enters the Treasury Account (e.g., 1000 XLM)
+The distribution contract is triggered
+The system instantly transfers each partner’s share to their wallet
 
-B) Borçların Kaydedilmesi
-Örneğin bir kredi alındığında ana para + faiz taksitleri sözleşmeye işlenir.
-Vade geldiğinde ödeme yükümlülüğü otomatik olarak ortaklar arasında paylaştırılır.
+Thanks to Stellar’s low fees, distribution is fast and nearly free.
 
-✅ 3. Kârın Otomatik Dağıtılması
-İşletme geliri Hazine Hesabına girer (örn. 1000 XLM).
-Dağıtım sözleşmesi tetiklenir.
-Sistem, kârı anında ortakların Stellar cüzdanlarına transfer eder.
-Stellar’ın düşük işlem ücretleri sayesinde dağıtım hızlı ve neredeyse ücretsizdir.
+🛠️ 4. MVP / Hackathon-Focused Core Functions
+These two smart contracts form the core of the MVP:
 
-🛠️ 4. MVP / Hackathon Odaklı Fonksiyonlar
-Bu iki akıllı sözleşme projenin çekirdeğini oluşturur:
+1️⃣ record_and_split_expense(amount, description)
+Logs the expense into the Liability Ledger
+Automatically calculates each partner’s share
 
-1️⃣ kaydet_ve_bolustur_gider(gider_miktari, gider_aciklamasi)
-Gideri Borç Kayıt Defterine işler.
-Ortakların payına düşen borç otomatik hesaplanır.
+2️⃣ distribute_profit(revenue_amount)
+Takes total income
+Transfers XLM to each partner based on token share percentages
+This minimal setup clearly demonstrates the power of decentralized partnership management.
 
-2️⃣ kar_dagit(gelir_miktari)
-Gelir miktarını alır.
-Token oranlarına göre XLM transferlerini otomatik gerçekleştirir.
-Bu minimal yapı, ortaklık yönetim sisteminin gücünü hızlıca gösterir.
+📐 System Architecture Overview
+Stellar → Fast, low-cost, secure transaction layer
+Soroban → Smart contracts for expenses, liabilities, and profit logic
+Multisig → Shared approval for spending
+Tokenization → Digital representation of partnership shares
 
-📐 Mimari Genel Görünüm
-Stellar → Hızlı, ucuz, güvenli transfer altyapısı
-Soroban → Gider/borç/kâr hesaplamalarını yapan akıllı sözleşmeler
-Multisig → Harcamaların ortak oylaması
-Tokenizasyon → Ortaklık paylarının dijital temsili
-
-📦 Kullanılan Teknolojiler
+📦 Technologies Used
 Stellar
 Soroban Smart Contracts
-Rust (sözleşme geliştirme)
+Rust (smart contract development)
 Stellar Asset Issuance
 Multisig Wallet Architecture
 
-📘 Kurulum & Çalıştırma (MVP için)
-MVP’de fonksiyonlar doğrudan Stellar/Soroban test ağında çalıştırılır.
-Soroban CLI kurulumu
-Proje sözleşmesinin testnet’e deploy edilmesi
-Ortaklık Tokenı’nın oluşturulması
-Hazine & ortak cüzdanlarının hazırlanması
-kaydet_ve_bolustur_gider ve kar_dagit fonksiyonlarının çalıştırılması
-(Dilersen buraya adım adım komutlar ekleyebilirim.)
+📘 Setup & Running (For MVP)
+In the MVP, functions run directly on the Stellar & Soroban test network.
+Install Soroban CLI
+Deploy the smart contract to testnet
+Create the Partnership Token
+Prepare the Treasury & partner wallets
+Run record_and_split_expense and distribute_profit functions
+(If you want, I can add step-by-step commands here.)
 
-🧩 Yol Haritası
-✔️ Gider & borç sözleşmesi
-✔️ Kâr dağıtım sözleşmesi
-🔜 Ortaklık içi oylama modülü
-🔜 Web dashboard (ön yüz)
-🔜 Gerçek zamanlı cüzdan takip ekranı
-🔜 Off-chain muhasebe entegrasyonu
+🧩 Roadmap
 
-🤝 Katkıda Bulunma
-Forkla
-Yeni bir branch aç (feature/...)
-PR aç
-Kod incelemeleri sonrası birleştirilir
+✔️ Expense & liability contract
+✔️ Profit distribution contract
+🔜 Partnership voting module
+🔜 Web dashboard (frontend)
+🔜 Real-time wallet monitoring panel
+🔜 Off-chain accounting integration
 
-📄 Lisans
-MIT Lisansı altında açık kaynaktır.
+🤝 Contributing
+
+Fork the repository
+Create a new branch (feature/...)
+Submit a Pull Request
+Your changes will be reviewed and merged
+
+📄 License
+This project is open-source under the MIT License.
