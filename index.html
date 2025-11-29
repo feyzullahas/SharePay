@@ -1041,50 +1041,9 @@
                 <button class="btn btn-success" onclick="openModal('incomeModal')">+ Yeni Gelir Ekle</button>
             </div>
             
+            
             <!-- Mobil Kartlar -->
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">25.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Ürün Satışı</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-positive">+12,500 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Detay Görüntüle</button>
-                </div>
-            </div>
-
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">20.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Kira Geliri</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-positive">+5,000 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Detay Görüntüle</button>
-                </div>
-            </div>
+            <div id="incomeMobileCards"></div>
 
             <!-- Desktop Tablo -->
             <div class="table-container">
@@ -1098,21 +1057,7 @@
                         <th>İşlem</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>25.11.2025</td>
-                        <td>Ürün Satışı</td>
-                        <td class="amount-positive">+12,500 XLM</td>
-                        <td><span class="badge badge-success">Dağıtıldı</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
-                    <tr>
-                        <td>20.11.2025</td>
-                        <td>Kira Geliri</td>
-                        <td class="amount-positive">+5,000 XLM</td>
-                        <td><span class="badge badge-success">Dağıtıldı</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
+                <tbody id="incomeTableBody">
                 </tbody>
             </table>
             </div>
@@ -1277,7 +1222,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>ABC Bank</td>
+                        <td>Ziraat Bankası</td>
                         <td>İşletme Kredisi</td>
                         <td>50,000 XLM</td>
                         <td class="amount-negative">8,000 XLM</td>
@@ -1419,18 +1364,18 @@
                 <h3 class="modal-title">Yeni Gelir Ekle</h3>
                 <button class="close-btn" onclick="closeModal('incomeModal')">×</button>
             </div>
-            <form>
+            <form id="incomeForm" onsubmit="addIncome(event)">
                 <div class="form-group">
                     <label class="form-label">Gelir Açıklaması</label>
-                    <input type="text" class="form-input" placeholder="Örn: Aylık kira geliri">
+                    <input type="text" id="incomeDescription" class="form-input" placeholder="Örn: Aylık kira geliri" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Miktar (XLM)</label>
-                    <input type="number" class="form-input" placeholder="0.00">
+                    <input type="number" id="incomeAmount" class="form-input" placeholder="0.00" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Tarih</label>
-                    <input type="date" class="form-input">
+                    <input type="date" id="incomeDate" class="form-input" required>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('incomeModal')">İptal</button>
@@ -1477,6 +1422,19 @@
             </div>
             <form>
                 <div class="form-group">
+                    <label class="form-label">Gelir Açıklaması</label>
+                    <input type="text" id="incomeDescription" class="form-input" placeholder="Örn: Aylık kira geliri" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" id="incomeAmount" class="form-input" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tarih</label>
+                    <input type="date" id="incomeDate" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <form id="incomeForm" onsubmit="addIncome(event)">
                     <label class="form-label">Borç Veren</label>
                     <input type="text" class="form-input" placeholder="Örn: ABC Bank">
                 </div>
@@ -1504,6 +1462,7 @@
     <div id="partnerModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
+                <form id="expenseForm" onsubmit="addExpense(event)">
                 <h3 class="modal-title">Yeni Ortak Ekle</h3>
                 <button class="close-btn" onclick="closeModal('partnerModal')">×</button>
             </div>
@@ -1826,7 +1785,129 @@
                 </div>
             `).join('');
         }
+          // Gelir ve Gider verilerini saklamak için array'ler
+          let incomes = [];
+        let expenses = [];
 
+        // localStorage'dan verileri yükle
+        function loadData() {
+            const savedIncomes = localStorage.getItem('incomes');
+            const savedExpenses = localStorage.getItem('expenses');
+            
+            if (savedIncomes) {
+                incomes = JSON.parse(savedIncomes);
+            }
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+            }
+            
+            renderIncomes();
+            renderExpenses();
+            updateStats();
+        }
+
+        // Gelir ekleme fonksiyonu
+        function addIncome(event) {
+            event.preventDefault();
+            
+            const description = document.getElementById('incomeDescription').value;
+            const amount = parseFloat(document.getElementById('incomeAmount').value);
+            const date = document.getElementById('incomeDate').value;
+            
+            if (!description || !amount || !date) {
+                alert('Lütfen tüm alanları doldurun!');
+                return;
+            }
+            
+            const newIncome = {
+                id: Date.now(),
+                description: description,
+                amount: amount,
+                date: date,
+                status: 'Dağıtıldı',
+                createdAt: new Date().toLocaleDateString('tr-TR')
+            };
+            
+            incomes.push(newIncome);
+            localStorage.setItem('incomes', JSON.stringify(incomes));
+            
+            renderIncomes();
+            updateStats();
+            
+            document.getElementById('incomeForm').reset();
+            closeModal('incomeModal');
+            alert('Gelir başarıyla eklendi!');
+        }
+
+        // Gelirleri görüntüleme fonksiyonu
+        function renderIncomes() {
+            const mobileContainer = document.getElementById('incomeMobileCards');
+            const tableBody = document.getElementById('incomeTableBody');
+            
+            if (!mobileContainer || !tableBody) return;
+            
+            if (incomes.length === 0) {
+                mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
+                tableBody.innerHTML = '';
+                return;
+            }
+            
+            // Mobil kartlar
+            mobileContainer.innerHTML = incomes.map(income => `
+                <div class="mobile-card">
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Tarih</span>
+                        <span class="mobile-card-value">${income.date}</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Açıklama</span>
+                        <span class="mobile-card-value">${income.description}</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Miktar</span>
+                        <span class="mobile-card-value amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Durum</span>
+                        <span class="mobile-card-value"><span class="badge badge-success">${income.status}</span></span>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Desktop tablo
+            tableBody.innerHTML = incomes.map(income => `
+                <tr>
+                    <td>${income.date}</td>
+                    <td>${income.description}</td>
+                    <td class="amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</td>
+                    <td><span class="badge badge-success">${income.status}</span></td>
+                    <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                </tr>
+            `).join('');
+        }
+
+        // İstatistikleri güncelleme fonksiyonu
+        function updateStats() {
+            const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            
+            // İstatistik kartlarını güncelle
+            const incomeStat = document.querySelector('.stat-card.income .stat-value');
+            const expenseStat = document.querySelector('.stat-card.expense .stat-value');
+            
+            if (incomeStat) {
+                incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+            }
+            if (expenseStat) {
+                expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+            }
+        }
+
+        // Sayfa yüklendiğinde verileri yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            renderWallets();
+            loadData();
+        });
         // Sayfa yüklendiğinde cüzdanları göster
         document.addEventListener('DOMContentLoaded', function() {
             renderWallets();
