@@ -500,7 +500,7 @@
         .partner-share {
             text-align: right;
         }
-
+        
         .share-percentage {
             font-size: 1.5rem;
             font-weight: bold;
@@ -941,7 +941,7 @@
             </div>
 
             <!-- Desktop İçin -->
-            <div class="table-container" style="display: none;">
+            <div class="table-container" id="incomeTableContainer" style="display: none;">
                 <div class="transaction-item income">
                     <div style="display: flex; align-items: center; flex: 1;">
                         <div class="transaction-icon income">↓</div>
@@ -1049,22 +1049,22 @@
             <!-- Mobil Kartlar -->
             <div id="incomeMobileCards"></div>
 
-            <!-- Desktop Tablo -->
-            <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tarih</th>
-                        <th>Açıklama</th>
-                        <th>Miktar</th>
-                        <th>Durum</th>
-                        <th>İşlem</th>
-                    </tr>
-                </thead>
-                <tbody id="incomeTableBody">
-                </tbody>
-            </table>
-            </div>
+                 <!-- Desktop Tablo -->
+                 <div class="table-container" id="incomeTableContainer" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Açıklama</th>
+                                <th>Miktar</th>
+                                <th>Durum</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeTableBody">
+                        </tbody>
+                    </table>
+                    </div>
         </div>
 
         <div class="section">
@@ -1668,141 +1668,73 @@
         alert('Gelir başarıyla eklendi!');
     }
 
-    // GELİRLERİ GÖSTER
-    function renderIncomes() {
-        const mobileContainer = document.getElementById('incomeMobileCards');
-        const tableBody = document.getElementById('incomeTableBody');
+        // Gelirleri görüntüleme fonksiyonu
         
-        if (!mobileContainer || !tableBody) return;
-        
-        if (incomes.length === 0) {
-            mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
-            tableBody.innerHTML = '';
-            return;
-        }
-        
-        // Mobil kartlar
-        mobileContainer.innerHTML = incomes.map(income => `
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">${income.date}</span>
+        function renderIncomes() {
+            const mobileContainer = document.getElementById('incomeMobileCards');
+            const tableBody = document.getElementById('incomeTableBody');
+            const tableContainer = document.getElementById('incomeTableContainer');
+            
+            if (!mobileContainer || !tableBody || !tableContainer) return;
+            
+            if (incomes.length === 0) {
+                mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
+                tableBody.innerHTML = '';
+                tableContainer.style.display = 'none';  // Tabloyu gizle
+                return;
+            }
+            
+            // Tabloyu göster
+            tableContainer.style.setProperty('display', 'block', 'important');
+            
+            // Mobil kartlar
+            mobileContainer.innerHTML = incomes.map(income => `
+                <div class="mobile-card">
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Tarih</span>
+                        <span class="mobile-card-value">${income.date}</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Açıklama</span>
+                        <span class="mobile-card-value">${income.description}</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Miktar</span>
+                        <span class="mobile-card-value amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</span>
+                    </div>
+                    <div class="mobile-card-row">
+                        <span class="mobile-card-label">Durum</span>
+                        <span class="mobile-card-value"><span class="badge badge-success">${income.status}</span></span>
+                    </div>
                 </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">${income.description}</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">${income.status}</span></span>
-                </div>
-            </div>
-        `).join('');
-        
-        // Desktop tablo
-        tableBody.innerHTML = incomes.map(income => `
-            <tr>
-                <td>${income.date}</td>
-                <td>${income.description}</td>
-                <td class="amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</td>
-                <td><span class="badge badge-success">${income.status}</span></td>
-                <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-            </tr>
-        `).join('');
-    }
-
-    // GİDER EKLEME
-    function addExpense(event) {
-        event.preventDefault();
-        
-        console.log('=== GİDER EKLEME BAŞLADI ===');
-        
-        const description = document.getElementById('expenseDescription').value;
-        const amount = parseFloat(document.getElementById('expenseAmount').value);
-        const date = document.getElementById('expenseDate').value;
-        
-        console.log('Açıklama:', description);
-        console.log('Miktar:', amount);
-        console.log('Tarih:', date);
-        
-        if (!description || !amount || !date) {
-            alert('Lütfen tüm alanları doldurun!');
-            return;
+            `).join('');
+            
+            // Desktop tablo
+            tableBody.innerHTML = incomes.map(income => `
+                <tr>
+                    <td>${income.date}</td>
+                    <td>${income.description}</td>
+                    <td class="amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</td>
+                    <td><span class="badge badge-success">${income.status}</span></td>
+                    <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                </tr>
+            `).join('');
         }
-        
-        const newExpense = {
-            id: Date.now(),
-            description: description,
-            amount: amount,
-            date: date,
-            status: 'Ödendi'
-        };
-        
-        console.log('Yeni Gider:', newExpense);
-        
-        expenses.push(newExpense);
-        console.log('Tüm Giderler:', expenses);
-        
-        localStorage.setItem('expenses', JSON.stringify(expenses));
-        
-        renderExpenses();
-        updateStats();
-        
-        document.getElementById('expenseForm').reset();
-        closeModal('expenseModal');
-        alert('Gider başarıyla eklendi!');
-    }
-
-    // GİDERLERİ GÖSTER
-    function renderExpenses() {
-        // Tüm tabloları bul
-        const tables = document.querySelectorAll('table tbody');
-        
-        if (tables.length < 2) {
-            console.log('Tablo bulunamadı');
-            return;
+        function updateStats() {
+            const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            
+            // İstatistik kartlarını güncelle
+            const incomeStat = document.querySelector('.stat-card.income .stat-value');
+            const expenseStat = document.querySelector('.stat-card.expense .stat-value');
+            
+            if (incomeStat) {
+                incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+            }
+            if (expenseStat) {
+                expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+            }
         }
-        
-        // İkinci tablo = Giderler tablosu
-        const tableBody = tables[1];
-        
-        if (expenses.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">Henüz gider eklenmemiş.</td></tr>';
-            return;
-        }
-        
-        tableBody.innerHTML = expenses.map(expense => `
-            <tr>
-                <td>${expense.date}</td>
-                <td>${expense.description}</td>
-                <td class="amount-negative">-${expense.amount.toLocaleString('tr-TR')} XLM</td>
-                <td><span class="badge badge-success">${expense.status}</span></td>
-                <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-            </tr>
-        `).join('');
-        
-        console.log('Giderler güncellendi:', expenses);
-    }
-
-    // İSTATİSTİKLERİ GÜNCELLE
-    function updateStats() {
-        const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
-        const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-        
-        const incomeStat = document.querySelector('.stat-card.income .stat-value');
-        const expenseStat = document.querySelector('.stat-card.expense .stat-value');
-        
-        if (incomeStat) {
-            incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
-        }
-        if (expenseStat) {
-            expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
-        }
-    }
 
     // CÜZDAN EKLEME
     function addWallet(event) {
