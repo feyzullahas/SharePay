@@ -1,11 +1,1064 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SharePay - İşletme Ortaklık Yönetimi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .wallet-address {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+        }
+
+        .stat-card.income { border-color: #10b981; }
+        .stat-card.expense { border-color: #ef4444; }
+        .stat-card.debt { border-color: #f59e0b; }
+        .stat-card.partners { border-color: #667eea; }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-currency {
+            font-size: 1rem;
+            color: #999;
+            margin-left: 0.3rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .partner-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .partner-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .partner-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .partner-details h4 {
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+
+        .partner-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .partner-share {
+            text-align: right;
+        }
+
+        .share-percentage {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .share-tokens {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .amount-positive {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .amount-negative {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .close-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+                font-size: 0.85rem;
+            }
+
+            .wallet-address {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            /* Mobil için tablo kartları */
+            .table-container {
+                display: none;
+            }
+
+            .mobile-card {
+                display: block;
+                background: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .mobile-card-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .mobile-card-row:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-card-label {
+                font-weight: 600;
+                color: #666;
+                font-size: 0.85rem;
+            }
+
+            .mobile-card-value {
+                color: #333;
+                font-size: 0.9rem;
+                text-align: right;
+            }
+
+            .mobile-card-actions {
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid #e5e7eb;
+            }
+
+            .partner-card {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .partner-info {
+                width: 100%;
+            }
+
+            .partner-share {
+                text-align: left;
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .share-percentage {
+                font-size: 1.3rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+
+        /* Desktop için mobil kartları gizle */
+        @media (min-width: 769px) {
+            .mobile-card {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <nav class="navbar">
+        <div class="logo">💼 SharePay</div>
+        <div class="user-info">
+            <span>İşletme: Teknoloji A.Ş.</span>
+            <span class="wallet-address">GDZX...7K2M</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-grid">
+            <div class="stat-card income">
+                <div class="stat-label">Toplam Gelir</div>
+                <div class="stat-value">45,250<span class="stat-currency">XLM</span></div>
+            </div>
+            <div class="stat-card expense">
+                <div class="stat-label">Toplam Gider</div>
+                <div class="stat-value">18,420<span class="stat-currency">XLM</span></div>
+            </div>
+            <div class="stat-card debt">
+                <div class="stat-label">Aktif Borçlar</div>
+                <div class="stat-value">12,000<span class="stat-currency">XLM</span></div>
+            </div>
+            <div class="stat-card partners">
+                <div class="stat-label">Ortak Sayısı</div>
+                <div class="stat-value">4<span class="stat-currency">Kişi</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">💰 Gelirler</h2>
+                <button class="btn btn-success" onclick="openModal('incomeModal')">+ Yeni Gelir Ekle</button>
+            </div>
+            
+            <!-- Mobil Kartlar -->
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">28.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Aylık Kira Geliri</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-positive">+5,000 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Detay Görüntüle</button>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">25.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Ürün Satışı</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-positive">+12,500 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Detay Görüntüle</button>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">20.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Danışmanlık Ücreti</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-positive">+8,750 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-pending">Beklemede</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Dağıt</button>
+                </div>
+            </div>
+
+            <!-- Desktop Tablo -->
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Açıklama</th>
+                        <th>Miktar</th>
+                        <th>Durum</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>28.11.2025</td>
+                        <td>Aylık Kira Geliri</td>
+                        <td class="amount-positive">+5,000 XLM</td>
+                        <td><span class="badge badge-success">Dağıtıldı</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                    </tr>
+                    <tr>
+                        <td>25.11.2025</td>
+                        <td>Ürün Satışı</td>
+                        <td class="amount-positive">+12,500 XLM</td>
+                        <td><span class="badge badge-success">Dağıtıldı</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                    </tr>
+                    <tr>
+                        <td>20.11.2025</td>
+                        <td>Danışmanlık Ücreti</td>
+                        <td class="amount-positive">+8,750 XLM</td>
+                        <td><span class="badge badge-pending">Beklemede</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Dağıt</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">💸 Giderler</h2>
+                <button class="btn btn-danger" onclick="openModal('expenseModal')">+ Yeni Gider Ekle</button>
+            </div>
+
+            <!-- Mobil Kartlar -->
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">27.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Ofis Kirası</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-negative">-3,200 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-success">Ödendi</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Detay Görüntüle</button>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">26.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Elektrik Faturası</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-negative">-450 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-success">Ödendi</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Detay Görüntüle</button>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">25.11.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Malzeme Alımı</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-negative">-5,670 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-pending">Onay Bekliyor</span></span>
+                </div>
+                <div class="mobile-card-actions">
+                    <button class="btn btn-primary">Onayla</button>
+                </div>
+            </div>
+
+            <!-- Desktop Tablo -->
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Açıklama</th>
+                        <th>Miktar</th>
+                        <th>Durum</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>27.11.2025</td>
+                        <td>Ofis Kirası</td>
+                        <td class="amount-negative">-3,200 XLM</td>
+                        <td><span class="badge badge-success">Ödendi</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                    </tr>
+                    <tr>
+                        <td>26.11.2025</td>
+                        <td>Elektrik Faturası</td>
+                        <td class="amount-negative">-450 XLM</td>
+                        <td><span class="badge badge-success">Ödendi</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+                    </tr>
+                    <tr>
+                        <td>25.11.2025</td>
+                        <td>Malzeme Alımı</td>
+                        <td class="amount-negative">-5,670 XLM</td>
+                        <td><span class="badge badge-pending">Onay Bekliyor</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Onayla</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">📋 Borçlar</h2>
+                <button class="btn btn-warning" onclick="openModal('debtModal')">+ Yeni Borç Ekle</button>
+            </div>
+
+            <!-- Mobil Kartlar -->
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Borç Veren</span>
+                    <span class="mobile-card-value">ABC Bank</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">İşletme Kredisi</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Toplam Tutar</span>
+                    <span class="mobile-card-value">50,000 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Kalan Tutar</span>
+                    <span class="mobile-card-value amount-negative">8,000 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Vade</span>
+                    <span class="mobile-card-value">15.01.2026</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-pending">Aktif</span></span>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Borç Veren</span>
+                    <span class="mobile-card-value">XYZ Tedarikçi</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">Malzeme Borcu</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Toplam Tutar</span>
+                    <span class="mobile-card-value">4,000 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Kalan Tutar</span>
+                    <span class="mobile-card-value amount-negative">4,000 XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Vade</span>
+                    <span class="mobile-card-value">05.12.2025</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-danger">Vadeli</span></span>
+                </div>
+            </div>
+
+            <!-- Desktop Tablo -->
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Borç Veren</th>
+                        <th>Açıklama</th>
+                        <th>Toplam Tutar</th>
+                        <th>Kalan Tutar</th>
+                        <th>Vade</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ABC Bank</td>
+                        <td>İşletme Kredisi</td>
+                        <td>50,000 XLM</td>
+                        <td class="amount-negative">8,000 XLM</td>
+                        <td>15.01.2026</td>
+                        <td><span class="badge badge-pending">Aktif</span></td>
+                    </tr>
+                    <tr>
+                        <td>XYZ Tedarikçi</td>
+                        <td>Malzeme Borcu</td>
+                        <td>4,000 XLM</td>
+                        <td class="amount-negative">4,000 XLM</td>
+                        <td>05.12.2025</td>
+                        <td><span class="badge badge-danger">Vadeli</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">👥 Ortaklar</h2>
+                <button class="btn btn-primary" onclick="openModal('partnerModal')">+ Yeni Ortak Ekle</button>
+            </div>
+            
+            <div class="partner-card">
+                <div class="partner-info">
+                    <div class="partner-avatar">AY</div>
+                    <div class="partner-details">
+                        <h4>Ahmet Yılmaz</h4>
+                        <p>GABC...XYZ9</p>
+                    </div>
+                </div>
+                <div class="partner-share">
+                    <div class="share-percentage">40%</div>
+                    <div class="share-tokens">400 Token</div>
+                </div>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-info">
+                    <div class="partner-avatar">EK</div>
+                    <div class="partner-details">
+                        <h4>Elif Kaya</h4>
+                        <p>GDEF...ABC3</p>
+                    </div>
+                </div>
+                <div class="partner-share">
+                    <div class="share-percentage">30%</div>
+                    <div class="share-tokens">300 Token</div>
+                </div>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-info">
+                    <div class="partner-avatar">MD</div>
+                    <div class="partner-details">
+                        <h4>Mehmet Demir</h4>
+                        <p>GHIJ...DEF7</p>
+                    </div>
+                </div>
+                <div class="partner-share">
+                    <div class="share-percentage">20%</div>
+                    <div class="share-tokens">200 Token</div>
+                </div>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-info">
+                    <div class="partner-avatar">ZA</div>
+                    <div class="partner-details">
+                        <h4>Zeynep Arslan</h4>
+                        <p>GKLM...GHI2</p>
+                    </div>
+                </div>
+                <div class="partner-share">
+                    <div class="share-percentage">10%</div>
+                    <div class="share-tokens">100 Token</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gelir Modal -->
+    <div id="incomeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Gelir Ekle</h3>
+                <button class="close-btn" onclick="closeModal('incomeModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Gelir Açıklaması</label>
+                    <input type="text" class="form-input" placeholder="Örn: Aylık kira geliri">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tarih</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('incomeModal')">İptal</button>
+                    <button type="submit" class="btn btn-success">Kaydet ve Dağıt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gider Modal -->
+    <div id="expenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Gider Ekle</h3>
+                <button class="close-btn" onclick="closeModal('expenseModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Gider Açıklaması</label>
+                    <input type="text" class="form-input" placeholder="Örn: Ofis kirası">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tarih</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('expenseModal')">İptal</button>
+                    <button type="submit" class="btn btn-danger">Kaydet ve Paylaştır</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Borç Modal -->
+    <div id="debtModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Borç Ekle</h3>
+                <button class="close-btn" onclick="closeModal('debtModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Borç Veren</label>
+                    <input type="text" class="form-input" placeholder="Örn: ABC Bank">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Açıklama</label>
+                    <input type="text" class="form-input" placeholder="Örn: İşletme kredisi">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Toplam Tutar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Vade Tarihi</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('debtModal')">İptal</button>
+                    <button type="submit" class="btn btn-warning">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ortak Modal -->
+    <div id="partnerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Ortak Ekle</h3>
+                <button class="close-btn" onclick="closeModal('partnerModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Ortak Adı</label>
+                    <input type="text" class="form-input" placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Stellar Cüzdan Adresi</label>
+                    <input type="text" class="form-input" placeholder="GXXX...XXXX">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ortaklık Payı (%)</label>
+                    <input type="number" class="form-input" placeholder="0" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Token Miktarı</label>
+                    <input type="number" class="form-input" placeholder="0">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('partnerModal')">İptal</button>
+                    <button type="submit" class="btn btn-primary">Ortak Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Modal dışına tıklanınca kapat
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
