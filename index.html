@@ -44,24 +44,244 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wallet-address:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .wallet-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wallet-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+            margin-bottom: 2rem; 
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .wallet-balance {
+            position: relative;
+            z-index: 1;
+        }
+
+        .wallet-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .wallet-btn {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .wallet-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .transaction-item:hover {
+            background: #f3f4f6;
+            border-left-color: #667eea;
+        }
+
+        .transaction-item.income {
+            border-left-color: #10b981;
+        }
+
+        .transaction-item.expense {
+            border-left-color: #ef4444;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .transaction-icon.income {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .transaction-icon.expense {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.2rem;
+        }
+
+        .transaction-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .transaction-amount {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .invoice-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .invoice-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102,126,234,0.1);
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .invoice-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .invoice-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .invoice-body {
+            margin-bottom: 1rem;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .invoice-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 2px solid #e5e7eb;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .invoice-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            margin-top: 2rem;  
+            grid-template-columns:repeat(4, 1fr);
+            gap: 1rem;
             margin-bottom: 2rem;
         }
 
         .stat-card {
             background: white;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-left: 4px solid;
@@ -73,19 +293,19 @@
         .stat-card.partners { border-color: #667eea; }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #666;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #333;
         }
 
         .stat-currency {
-            font-size: 1rem;
+            font-size: 0.75rem;
             color: #999;
             margin-left: 0.3rem;
         }
@@ -96,6 +316,8 @@
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .section-header {
@@ -247,6 +469,34 @@
             font-size: 0.9rem;
         }
 
+        .partner-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .partner-stat {
+            text-align: center;
+        }
+
+        .partner-stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .partner-stat-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .partner-stat-value.positive {
+            color: #10b981;
+        }
+
         .partner-share {
             text-align: right;
         }
@@ -260,6 +510,38 @@
         .share-tokens {
             font-size: 0.85rem;
             color: #666;
+        }
+
+        .partner-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .partner-stat {
+            text-align: center;
+        }
+
+        .partner-stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .partner-stat-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .partner-stat-value.positive {
+            color: #10b981;
+        }
+
+        .partner-stat-value.negative {
+            color: #ef4444;
         }
 
         .amount-positive {
@@ -363,7 +645,11 @@
 
         @media (max-width: 768px) {
             .dashboard-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
             }
 
             .navbar {
@@ -388,7 +674,9 @@
             }
 
             .container {
-                padding: 0 1rem;
+                max-width: 720px;        /* Çok daha dar ve şık */
+                margin: 3rem auto;       /* Üstten de biraz daha boşluk */
+                 padding: 0 1rem;
             }
 
             .section {
@@ -422,8 +710,38 @@
             }
 
             /* Mobil için tablo kartları */
+            .wallet-actions {
+                flex-direction: column;
+            }
+
+            .wallet-amount {
+                font-size: 2rem;
+            }
+
+            .transaction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .transaction-amount {
+                font-size: 1.2rem;
+            }
+
+            .invoice-card {
+                padding: 1rem;
+            }
+
+            .invoice-actions {
+                flex-direction: column;
+            }
+
+            .invoice-actions .btn {
+                width: 100%;
+            }
+
             .table-container {
-                display: none;
+                display: none !important;
             }
 
             .mobile-card {
@@ -481,6 +799,15 @@
                 align-items: center;
             }
 
+            .partner-stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .partner-stat {
+                text-align: left;
+            }
+
             .share-percentage {
                 font-size: 1.3rem;
             }
@@ -508,12 +835,16 @@
             .mobile-card {
                 display: none;
             }
+            
+            .table-container {
+                display: block !important;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">💼 SharePay</div>
+        <div class="logo"><img src="Logo/logo.jpg" alt="SharePay" style="width: 50px; height: 50px; border-radius: 12px; vertical-align: middle; object-fit: cover;"> SharePay</div>
         <div class="user-info">
             <span>İşletme: Teknoloji A.Ş.</span>
             <span class="wallet-address">GDZX...7K2M</span>
@@ -521,14 +852,43 @@
     </nav>
 
     <div class="container">
+        <!-- Cüzdan Kartı -->
+        <div class="wallet-card">
+            <div class="wallet-header">
+                <div>
+                    <h3 style="margin-bottom: 0.5rem; opacity: 0.9;">İşletme Cüzdanı</h3>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">GDZX7K2M...4XYZ</p>
+                </div>
+                <button class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 0.6rem 1rem;">
+                    📋 Kopyala
+                </button>
+            </div>
+            <div class="wallet-balance">
+                <div class="wallet-label">Toplam Bakiye</div>
+                <div class="wallet-amount">26,830 XLM</div>
+                <p style="opacity: 0.8; margin-top: 0.5rem;">≈ $4,024.50 USD</p>
+            </div>
+            <div class="wallet-actions">
+                <button class="wallet-btn" onclick="openModal('depositModal')">
+                    ⬇️ Para Yatır
+                </button>
+                <button class="wallet-btn" onclick="openModal('withdrawModal')">
+                    ⬆️ Para Çek
+                </button>
+                <button class="wallet-btn" onclick="openModal('transferModal')">
+                    🔄 Transfer
+                </button>
+            </div>
+        </div>
+
         <div class="dashboard-grid">
             <div class="stat-card income">
                 <div class="stat-label">Toplam Gelir</div>
-                <div class="stat-value">45,250<span class="stat-currency">XLM</span></div>
+                <div class="stat-value">17,500<span class="stat-currency">XLM</span></div>
             </div>
             <div class="stat-card expense">
                 <div class="stat-label">Toplam Gider</div>
-                <div class="stat-value">18,420<span class="stat-currency">XLM</span></div>
+                <div class="stat-value">3,650<span class="stat-currency">XLM</span></div>
             </div>
             <div class="stat-card debt">
                 <div class="stat-label">Aktif Borçlar</div>
@@ -540,6 +900,141 @@
             </div>
         </div>
 
+        
+
+        <!-- Hesap Hareketleri -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">📊 Hesap Hareketleri</h2>
+                <button class="btn btn-primary" onclick="openModal('filterModal')">🔍 Filtrele</button>
+            </div>
+
+            <!-- Mobil Kartlar -->
+            <div class="mobile-card">
+                <div class="transaction-item income">
+                    <div style="display: flex; align-items: center; flex: 1;">
+                        <div class="transaction-icon income">↓</div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Ürün Satışı</div>
+                            <div class="transaction-date">25 Kasım 2025, 16:45</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+12,500 XLM</div>
+                </div>
+            </div>
+
+            <div class="mobile-card">
+                <div class="transaction-item income">
+                    <div style="display: flex; align-items: center; flex: 1;">
+                        <div class="transaction-icon income">↓</div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Kira Geliri</div>
+                            <div class="transaction-date">20 Kasım 2025, 14:30</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+5,000 XLM</div>
+                </div>
+            </div>
+
+            <!-- Desktop İçin -->
+            <div class="table-container" style="display: none;">
+                <div class="transaction-item income">
+                    <div style="display: flex; align-items: center; flex: 1;">
+                        <div class="transaction-icon income">↓</div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Ürün Satışı</div>
+                            <div class="transaction-date">25 Kasım 2025, 16:45</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+12,500 XLM</div>
+                </div>
+
+                <div class="transaction-item income">
+                    <div style="display: flex; align-items: center; flex: 1;">
+                        <div class="transaction-icon income">↓</div>
+                        <div class="transaction-info">
+                            <div class="transaction-title">Kira Geliri</div>
+                            <div class="transaction-date">20 Kasım 2025, 14:30</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+5,000 XLM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faturalar -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">🧾 Faturalar</h2>
+                <button class="btn btn-primary" onclick="openModal('invoiceModal')">+ Yeni Fatura</button>
+            </div>
+
+            <div class="invoice-card">
+                <div class="invoice-header">
+                    <div>
+                        <div class="invoice-number">#INV-2025-001</div>
+                        <div class="invoice-date">Düzenleme: 25.11.2025</div>
+                    </div>
+                    <span class="badge badge-success">Ödendi</span>
+                </div>
+                <div class="invoice-body">
+                    <div class="invoice-row">
+                        <span>Müşteri:</span>
+                        <span>ABC Teknoloji Ltd.</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>Hizmet:</span>
+                        <span>Web Yazılım Geliştirme</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>Vade Tarihi:</span>
+                        <span>15.12.2025</span>
+                    </div>
+                </div>
+                <div class="invoice-total">
+                    <span>Toplam Tutar:</span>
+                    <span>12,500 XLM</span>
+                </div>
+                <div class="invoice-actions">
+                    <button class="btn btn-primary btn-small">PDF İndir</button>
+                    <button class="btn btn-primary btn-small">Detay</button>
+                </div>
+            </div>
+
+            <div class="invoice-card">
+                <div class="invoice-header">
+                    <div>
+                        <div class="invoice-number">#INV-2025-002</div>
+                        <div class="invoice-date">Düzenleme: 20.11.2025</div>
+                    </div>
+                    <span class="badge badge-pending">Beklemede</span>
+                </div>
+                <div class="invoice-body">
+                    <div class="invoice-row">
+                        <span>Müşteri:</span>
+                        <span>XYZ Danışmanlık A.Ş.</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>Hizmet:</span>
+                        <span>Aylık Kira Geliri</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>Vade Tarihi:</span>
+                        <span>05.12.2025</span>
+                    </div>
+                </div>
+                <div class="invoice-total">
+                    <span>Toplam Tutar:</span>
+                    <span>5,000 XLM</span>
+                </div>
+                <div class="invoice-actions">
+                    <button class="btn btn-primary btn-small">PDF İndir</button>
+                    <button class="btn btn-primary btn-small">Detay</button>
+                    <button class="btn btn-success btn-small">Ödendi İşaretle</button>
+                </div>
+            </div>
+        </div>
+
         <div class="section">
             <div class="section-header">
                 <h2 class="section-title">💰 Gelirler</h2>
@@ -547,28 +1042,6 @@
             </div>
             
             <!-- Mobil Kartlar -->
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">28.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Aylık Kira Geliri</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-positive">+5,000 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Detay Görüntüle</button>
-                </div>
-            </div>
-
             <div class="mobile-card">
                 <div class="mobile-card-row">
                     <span class="mobile-card-label">Tarih</span>
@@ -598,18 +1071,18 @@
                 </div>
                 <div class="mobile-card-row">
                     <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Danışmanlık Ücreti</span>
+                    <span class="mobile-card-value">Kira Geliri</span>
                 </div>
                 <div class="mobile-card-row">
                     <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-positive">+8,750 XLM</span>
+                    <span class="mobile-card-value amount-positive">+5,000 XLM</span>
                 </div>
                 <div class="mobile-card-row">
                     <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-pending">Beklemede</span></span>
+                    <span class="mobile-card-value"><span class="badge badge-success">Dağıtıldı</span></span>
                 </div>
                 <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Dağıt</button>
+                    <button class="btn btn-primary">Detay Görüntüle</button>
                 </div>
             </div>
 
@@ -627,13 +1100,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>28.11.2025</td>
-                        <td>Aylık Kira Geliri</td>
-                        <td class="amount-positive">+5,000 XLM</td>
-                        <td><span class="badge badge-success">Dağıtıldı</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
-                    <tr>
                         <td>25.11.2025</td>
                         <td>Ürün Satışı</td>
                         <td class="amount-positive">+12,500 XLM</td>
@@ -642,10 +1108,10 @@
                     </tr>
                     <tr>
                         <td>20.11.2025</td>
-                        <td>Danışmanlık Ücreti</td>
-                        <td class="amount-positive">+8,750 XLM</td>
-                        <td><span class="badge badge-pending">Beklemede</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Dağıt</button></td>
+                        <td>Kira Geliri</td>
+                        <td class="amount-positive">+5,000 XLM</td>
+                        <td><span class="badge badge-success">Dağıtıldı</span></td>
+                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -703,28 +1169,6 @@
                 </div>
             </div>
 
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">25.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Malzeme Alımı</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-negative">-5,670 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-pending">Onay Bekliyor</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Onayla</button>
-                </div>
-            </div>
-
             <!-- Desktop Tablo -->
             <div class="table-container">
             <table>
@@ -751,13 +1195,6 @@
                         <td class="amount-negative">-450 XLM</td>
                         <td><span class="badge badge-success">Ödendi</span></td>
                         <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
-                    <tr>
-                        <td>25.11.2025</td>
-                        <td>Malzeme Alımı</td>
-                        <td class="amount-negative">-5,670 XLM</td>
-                        <td><span class="badge badge-pending">Onay Bekliyor</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Onayla</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -863,7 +1300,7 @@
         <div class="section">
             <div class="section-header">
                 <h2 class="section-title">👥 Ortaklar</h2>
-                <button class="btn btn-primary" onclick="openModal('partnerModal')">+ Yeni Ortak Ekle</button>
+                
             </div>
             
             <div class="partner-card">
@@ -877,6 +1314,16 @@
                 <div class="partner-share">
                     <div class="share-percentage">40%</div>
                     <div class="share-tokens">400 Token</div>
+                </div>
+                <div class="partner-stats">
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Gelir</div>
+                        <div class="partner-stat-value positive">+7,000 XLM</div>
+                    </div>
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Borç</div>
+                        <div class="partner-stat-value negative">-4,800 XLM</div>
+                    </div>
                 </div>
             </div>
 
@@ -892,6 +1339,16 @@
                     <div class="share-percentage">30%</div>
                     <div class="share-tokens">300 Token</div>
                 </div>
+                <div class="partner-stats">
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Gelir</div>
+                        <div class="partner-stat-value positive">+5,250 XLM</div>
+                    </div>
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Borç</div>
+                        <div class="partner-stat-value negative">-3,600 XLM</div>
+                    </div>
+                </div>
             </div>
 
             <div class="partner-card">
@@ -905,6 +1362,16 @@
                 <div class="partner-share">
                     <div class="share-percentage">20%</div>
                     <div class="share-tokens">200 Token</div>
+                </div>
+                <div class="partner-stats">
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Gelir</div>
+                        <div class="partner-stat-value positive">+3,500 XLM</div>
+                    </div>
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Borç</div>
+                        <div class="partner-stat-value negative">-2,400 XLM</div>
+                    </div>
                 </div>
             </div>
 
@@ -920,9 +1387,30 @@
                     <div class="share-percentage">10%</div>
                     <div class="share-tokens">100 Token</div>
                 </div>
+                <div class="partner-stats">
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Gelir</div>
+                        <div class="partner-stat-value positive">+1,750 XLM</div>
+                    </div>
+                    <div class="partner-stat">
+                        <div class="partner-stat-label">Kişi Başı Borç</div>
+                        <div class="partner-stat-value negative">-1,200 XLM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">💳 Cüzdanlar</h2>
+                <button class="btn btn-primary" onclick="openModal('walletModal')">+ Yeni Cüzdan Ekle</button>
+            </div>
+            
+            <div id="walletsList">
+                <!-- Cüzdanlar buraya dinamik olarak eklenecek -->
             </div>
         </div>
     </div>
+    
 
     <!-- Gelir Modal -->
     <div id="incomeModal" class="modal">
@@ -1044,7 +1532,305 @@
         </div>
     </div>
 
+    <!-- Para Yatırma Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cüzdana Para Yatır</h3>
+                <button class="close-btn" onclick="closeModal('depositModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Açıklama</label>
+                    <input type="text" class="form-input" placeholder="Örn: İlk sermaye yatırımı">
+                </div>
+                <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                    <p style="font-size: 0.9rem; color: #92400e;">
+                        <strong>⚠️ Dikkat:</strong> Para yatırma işlemi multisig onayı gerektirir.
+                    </p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('depositModal')">İptal</button>
+                    <button type="submit" class="btn btn-primary">Onayla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Para Çekme Modal -->
+    <div id="withdrawModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cüzdantan Para Çek</h3>
+                <button class="close-btn" onclick="closeModal('withdrawModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Hedef Cüzdan Adresi</label>
+                    <input type="text" class="form-input" placeholder="GXXX...XXXX">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Açıklama</label>
+                    <input type="text" class="form-input" placeholder="Örn: Kişisel hesaba transfer">
+                </div>
+                <div style="background: #fee2e2; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                    <p style="font-size: 0.9rem; color: #991b1b;">
+                        <strong>⚠️ Dikkat:</strong> Para çekme işlemi geri alınamaz ve multisig onayı gerektirir.
+                    </p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('withdrawModal')">İptal</button>
+                    <button type="submit" class="btn btn-danger">Çek</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transfer Modal -->
+    <div id="transferModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Ortaklar Arası Transfer</h3>
+                <button class="close-btn" onclick="closeModal('transferModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Alıcı Ortak</label>
+                    <select class="form-input">
+                        <option>Seçiniz...</option>
+                        <option>Ahmet Yılmaz (40%)</option>
+                        <option>Elif Kaya (30%)</option>
+                        <option>Mehmet Demir (20%)</option>
+                        <option>Zeynep Arslan (10%)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Miktar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Açıklama</label>
+                    <input type="text" class="form-input" placeholder="Örn: Borç ödemesi">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('transferModal')">İptal</button>
+                    <button type="submit" class="btn btn-primary">Transfer Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fatura Modal -->
+    <div id="invoiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Yeni Fatura Oluştur</h3>
+                <button class="close-btn" onclick="closeModal('invoiceModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Müşteri Adı</label>
+                    <input type="text" class="form-input" placeholder="Örn: ABC Teknoloji Ltd.">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Hizmet/Ürün Açıklaması</label>
+                    <input type="text" class="form-input" placeholder="Örn: Web yazılım geliştirme">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tutar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Düzenleme Tarihi</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Vade Tarihi</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('invoiceModal')">İptal</button>
+                    <button type="submit" class="btn btn-primary">Fatura Oluştur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Filtre Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Hareketleri Filtrele</h3>
+                <button class="close-btn" onclick="closeModal('filterModal')">×</button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">İşlem Tipi</label>
+                    <select class="form-input">
+                        <option>Tümü</option>
+                        <option>Gelir</option>
+                        <option>Gider</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Başlangıç Tarihi</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bitiş Tarihi</label>
+                    <input type="date" class="form-input">
+                </div>
+          
+                <div class="form-group">
+                    <label class="form-label">Minimum Tutar (XLM)</label>
+                    <input type="number" class="form-input" placeholder="0.00">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('filterModal')">İptal</button>
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Cüzdan Ekleme Modal -->
+<div id="walletModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Yeni Cüzdan Ekle</h3>
+            <button class="close-btn" onclick="closeModal('walletModal')">×</button>
+        </div>
+        <form id="walletForm" onsubmit="addWallet(event)">
+            <div class="form-group">
+                <label class="form-label">Cüzdan İsmi</label>
+                <input type="text" id="walletName" class="form-input" placeholder="Örn: Ana İşletme Cüzdanı" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Public Key</label>
+                <input type="text" id="walletPublicKey" class="form-input" placeholder="GXXX...XXXX" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Ortaklık Oranı (%)</label>
+                <input type="number" id="walletPartnershipRatio" class="form-input" placeholder="0" min="0" max="100" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Hesap Tipi</label>
+                <select id="walletAccountType" class="form-input" required>
+                    <option value="">Seçiniz...</option>
+                    <option value="ana">Ana Hesap</option>
+                    <option value="ortak">Ortak Hesap</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn" style="background: #e5e7eb; color: #333;" onclick="closeModal('walletModal')">İptal</button>
+                <button type="submit" class="btn btn-primary">Cüzdan Ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
     <script>
+        
+        // Mevcut fonksiyonlar...
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Modal dışına tıklanınca kapat
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Cüzdanları saklamak için array
+        let wallets = [];
+
+        // Cüzdan ekleme fonksiyonu
+        function addWallet(event) {
+            event.preventDefault();
+            
+            const walletName = document.getElementById('walletName').value;
+            const publicKey = document.getElementById('walletPublicKey').value;
+            const partnershipRatio = parseFloat(document.getElementById('walletPartnershipRatio').value);
+            const accountType = document.getElementById('walletAccountType').value;
+            
+            // Yeni cüzdan objesi oluştur
+            const newWallet = {
+                id: Date.now(),
+                name: walletName,
+                publicKey: publicKey,
+                partnershipRatio: partnershipRatio,
+                accountType: accountType,
+                createdAt: new Date().toLocaleDateString('tr-TR')
+            };
+            
+            // Array'e ekle
+            wallets.push(newWallet);
+            
+            // Listeyi güncelle
+            renderWallets();
+            
+            // Formu temizle ve modal'ı kapat
+            document.getElementById('walletForm').reset();
+            closeModal('walletModal');
+            
+            // Başarı mesajı (isteğe bağlı)
+            alert('Cüzdan başarıyla eklendi!');
+        }
+
+        // Cüzdanları görüntüleme fonksiyonu
+        function renderWallets() {
+            const walletsList = document.getElementById('walletsList');
+            
+            if (wallets.length === 0) {
+                walletsList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💳</div>
+                        <p>Henüz cüzdan eklenmemiş. İlk cüzdanınızı ekleyin!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            walletsList.innerHTML = wallets.map(wallet => `
+                <div class="partner-card" style="margin-bottom: 1rem;">
+                    <div class="partner-info">
+                        <div class="partner-avatar">${wallet.name.charAt(0).toUpperCase()}</div>
+                        <div class="partner-details">
+                            <h4>${wallet.name}</h4>
+                            <p>${wallet.publicKey}</p>
+                            <p style="font-size: 0.85rem; color: #999; margin-top: 0.3rem;">
+                                ${wallet.accountType === 'ana' ? '🏠 Ana Hesap' : '👥 Ortak Hesap'} | 
+                                Eklenme: ${wallet.createdAt}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="partner-share">
+                        <div class="share-percentage">${wallet.partnershipRatio}%</div>
+                        <div class="share-tokens">Ortaklık Oranı</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Sayfa yüklendiğinde cüzdanları göster
+        document.addEventListener('DOMContentLoaded', function() {
+            renderWallets();
+        });
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
         }
