@@ -843,7 +843,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo"><img src="Logo/logo.jpg" alt="SharePay" style="width: 50px; height: 50px; border-radius: 12px; vertical-align: middle; object-fit: cover;"> SharePay</div>
+        <div class="logo"><img src="../Logo/logo.jpg" alt="SharePay" style="width: 50px; height: 50px; border-radius: 12px; vertical-align: middle; object-fit: cover;"> SharePay</div>
         <div class="user-info">
             <span>İşletme: Teknoloji A.Ş.</span>
             <span class="wallet-address">GDZX...7K2M</span>
@@ -851,20 +851,22 @@
     </nav>
 
     <div class="container">
-        <!-- Cüzdan Kartı -->
+
         <div class="wallet-card">
             <div class="wallet-header">
                 <div>
                     <h3 style="margin-bottom: 0.5rem; opacity: 0.9;">İşletme Cüzdanı</h3>
-                    <p style="opacity: 0.8; font-size: 0.9rem;">GDZX7K2M...4XYZ</p>
+                       <p style="opacity: 0.8; font-size: 0.9rem;" id="anaKey"></p>
                 </div>
+                                 
+
                 <button class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 0.6rem 1rem;">
                     📋 Kopyala
                 </button>
             </div>
             <div class="wallet-balance">
                 <div class="wallet-label">Toplam Bakiye</div>
-                <div class="wallet-amount">26,830 XLM</div>
+                <div class="wallet-amount"></div>
                 <p style="opacity: 0.8; margin-top: 0.5rem;">≈ $4,024.50 USD</p>
             </div>
             <div class="wallet-actions">
@@ -895,7 +897,10 @@
             </div>
             <div class="stat-card partners">
                 <div class="stat-label">Ortak Sayısı</div>
-                <div class="stat-value">4<span class="stat-currency">Kişi</span></div>
+                <div class="stat-value">
+                    <span id="kisiCount"></span>
+                    <span class="stat-currency">Kişi</span>
+                </div>
             </div>
         </div>
 
@@ -1246,102 +1251,9 @@
                 <h2 class="section-title">👥 Ortaklar</h2>
                 
             </div>
-            
-            <div class="partner-card">
-                <div class="partner-info">
-                    <div class="partner-avatar">AY</div>
-                    <div class="partner-details">
-                        <h4>Ahmet Yılmaz</h4>
-                        <p>GABC...XYZ9</p>
-                    </div>
-                </div>
-                <div class="partner-share">
-                    <div class="share-percentage">40%</div>
-                    <div class="share-tokens">400 Token</div>
-                </div>
-                <div class="partner-stats">
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Gelir</div>
-                        <div class="partner-stat-value positive">+7,000 XLM</div>
-                    </div>
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Borç</div>
-                        <div class="partner-stat-value negative">-4,800 XLM</div>
-                    </div>
-                </div>
-            </div>
+            <div id="partners"></div>
 
-            <div class="partner-card">
-                <div class="partner-info">
-                    <div class="partner-avatar">EK</div>
-                    <div class="partner-details">
-                        <h4>Elif Kaya</h4>
-                        <p>GDEF...ABC3</p>
-                    </div>
-                </div>
-                <div class="partner-share">
-                    <div class="share-percentage">30%</div>
-                    <div class="share-tokens">300 Token</div>
-                </div>
-                <div class="partner-stats">
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Gelir</div>
-                        <div class="partner-stat-value positive">+5,250 XLM</div>
-                    </div>
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Borç</div>
-                        <div class="partner-stat-value negative">-3,600 XLM</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="partner-card">
-                <div class="partner-info">
-                    <div class="partner-avatar">MD</div>
-                    <div class="partner-details">
-                        <h4>Mehmet Demir</h4>
-                        <p>GHIJ...DEF7</p>
-                    </div>
-                </div>
-                <div class="partner-share">
-                    <div class="share-percentage">20%</div>
-                    <div class="share-tokens">200 Token</div>
-                </div>
-                <div class="partner-stats">
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Gelir</div>
-                        <div class="partner-stat-value positive">+3,500 XLM</div>
-                    </div>
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Borç</div>
-                        <div class="partner-stat-value negative">-2,400 XLM</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-info">
-                    <div class="partner-avatar">ZA</div>
-                    <div class="partner-details">
-                        <h4>Zeynep Arslan</h4>
-                        <p>GKLM...GHI2</p>
-                    </div>
-                </div>
-                <div class="partner-share">
-                    <div class="share-percentage">10%</div>
-                    <div class="share-tokens">100 Token</div>
-                </div>
-                <div class="partner-stats">
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Gelir</div>
-                        <div class="partner-stat-value positive">+1,750 XLM</div>
-                    </div>
-                    <div class="partner-stat">
-                        <div class="partner-stat-label">Kişi Başı Borç</div>
-                        <div class="partner-stat-value negative">-1,200 XLM</div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="section">
             <div class="section-header">
@@ -1696,235 +1608,328 @@
     </div>
 </div>
 
-    <script>
+<script>
+    // Verileri saklamak için array'ler
+    let incomes = [];
+    let expenses = [];
+
+    // Sayfa yüklendiğinde
+    document.addEventListener('DOMContentLoaded', function() {
+        loadData();
+        renderWallets();
+    });
+
+    // LocalStorage'dan veri yükle
+    function loadData() {
+        const savedIncomes = localStorage.getItem('incomes');
+        const savedExpenses = localStorage.getItem('expenses');
         
-        // Mevcut fonksiyonlar...
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
+        if (savedIncomes) {
+            incomes = JSON.parse(savedIncomes);
         }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+        if (savedExpenses) {
+            expenses = JSON.parse(savedExpenses);
         }
+        
+        renderIncomes();
+        renderExpenses();
+        updateStats();
+    }
 
-        // Modal dışına tıklanınca kapat
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-            }
+    // GELIR EKLEME
+    function addIncome(event) {
+        event.preventDefault();
+        
+        const description = document.getElementById('incomeDescription').value;
+        const amount = parseFloat(document.getElementById('incomeAmount').value);
+        const date = document.getElementById('incomeDate').value;
+        
+        if (!description || !amount || !date) {
+            alert('Lütfen tüm alanları doldurun!');
+            return;
         }
+        
+        const newIncome = {
+            id: Date.now(),
+            description: description,
+            amount: amount,
+            date: date,
+            status: 'Dağıtıldı'
+        };
+        
+        incomes.push(newIncome);
+        localStorage.setItem('incomes', JSON.stringify(incomes));
+        
+        renderIncomes();
+        updateStats();
+        
+        document.getElementById('incomeForm').reset();
+        closeModal('incomeModal');
+        alert('Gelir başarıyla eklendi!');
+    }
 
-        // Cüzdanları saklamak için array
-        let wallets = [];
-
-        // Cüzdan ekleme fonksiyonu
-        function addWallet(event) {
-            event.preventDefault();
-            
-            const walletName = document.getElementById('walletName').value;
-            const publicKey = document.getElementById('walletPublicKey').value;
-            const partnershipRatio = parseFloat(document.getElementById('walletPartnershipRatio').value);
-            const accountType = document.getElementById('walletAccountType').value;
-            
-            // Yeni cüzdan objesi oluştur
-            const newWallet = {
-                id: Date.now(),
-                name: walletName,
-                publicKey: publicKey,
-                partnershipRatio: partnershipRatio,
-                accountType: accountType,
-                createdAt: new Date().toLocaleDateString('tr-TR')
-            };
-            
-            // Array'e ekle
-            wallets.push(newWallet);
-            
-            // Listeyi güncelle
-            renderWallets();
-            
-            // Formu temizle ve modal'ı kapat
-            document.getElementById('walletForm').reset();
-            closeModal('walletModal');
-            
-            // Başarı mesajı (isteğe bağlı)
-            alert('Cüzdan başarıyla eklendi!');
+    // GELİRLERİ GÖSTER
+    function renderIncomes() {
+        const mobileContainer = document.getElementById('incomeMobileCards');
+        const tableBody = document.getElementById('incomeTableBody');
+        
+        if (!mobileContainer || !tableBody) return;
+        
+        if (incomes.length === 0) {
+            mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
+            tableBody.innerHTML = '';
+            return;
         }
+        
+        // Mobil kartlar
+        mobileContainer.innerHTML = incomes.map(income => `
+            <div class="mobile-card">
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Tarih</span>
+                    <span class="mobile-card-value">${income.date}</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Açıklama</span>
+                    <span class="mobile-card-value">${income.description}</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Miktar</span>
+                    <span class="mobile-card-value amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</span>
+                </div>
+                <div class="mobile-card-row">
+                    <span class="mobile-card-label">Durum</span>
+                    <span class="mobile-card-value"><span class="badge badge-success">${income.status}</span></span>
+                </div>
+            </div>
+        `).join('');
+        
+        // Desktop tablo
+        tableBody.innerHTML = incomes.map(income => `
+            <tr>
+                <td>${income.date}</td>
+                <td>${income.description}</td>
+                <td class="amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</td>
+                <td><span class="badge badge-success">${income.status}</span></td>
+                <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+            </tr>
+        `).join('');
+    }
 
-        // Cüzdanları görüntüleme fonksiyonu
-        function renderWallets() {
-            const walletsList = document.getElementById('walletsList');
-            
-            if (wallets.length === 0) {
-                walletsList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">💳</div>
-                        <p>Henüz cüzdan eklenmemiş. İlk cüzdanınızı ekleyin!</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            walletsList.innerHTML = wallets.map(wallet => `
-                <div class="partner-card" style="margin-bottom: 1rem;">
-                    <div class="partner-info">
-                        <div class="partner-avatar">${wallet.name.charAt(0).toUpperCase()}</div>
-                        <div class="partner-details">
-                            <h4>${wallet.name}</h4>
-                            <p>${wallet.publicKey}</p>
-                            <p style="font-size: 0.85rem; color: #999; margin-top: 0.3rem;">
-                                ${wallet.accountType === 'ana' ? '🏠 Ana Hesap' : '👥 Ortak Hesap'} | 
-                                Eklenme: ${wallet.createdAt}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="partner-share">
-                        <div class="share-percentage">${wallet.partnershipRatio}%</div>
-                        <div class="share-tokens">Ortaklık Oranı</div>
+    // GİDER EKLEME
+    function addExpense(event) {
+        event.preventDefault();
+        
+        console.log('=== GİDER EKLEME BAŞLADI ===');
+        
+        const description = document.getElementById('expenseDescription').value;
+        const amount = parseFloat(document.getElementById('expenseAmount').value);
+        const date = document.getElementById('expenseDate').value;
+        
+        console.log('Açıklama:', description);
+        console.log('Miktar:', amount);
+        console.log('Tarih:', date);
+        
+        if (!description || !amount || !date) {
+            alert('Lütfen tüm alanları doldurun!');
+            return;
+        }
+        
+        const newExpense = {
+            id: Date.now(),
+            description: description,
+            amount: amount,
+            date: date,
+            status: 'Ödendi'
+        };
+        
+        console.log('Yeni Gider:', newExpense);
+        
+        expenses.push(newExpense);
+        console.log('Tüm Giderler:', expenses);
+        
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        
+        renderExpenses();
+        updateStats();
+        
+        document.getElementById('expenseForm').reset();
+        closeModal('expenseModal');
+        alert('Gider başarıyla eklendi!');
+    }
+
+    // GİDERLERİ GÖSTER
+    function renderExpenses() {
+        // Tüm tabloları bul
+        const tables = document.querySelectorAll('table tbody');
+        
+        if (tables.length < 2) {
+            console.log('Tablo bulunamadı');
+            return;
+        }
+        
+        // İkinci tablo = Giderler tablosu
+        const tableBody = tables[1];
+        
+        if (expenses.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">Henüz gider eklenmemiş.</td></tr>';
+            return;
+        }
+        
+        tableBody.innerHTML = expenses.map(expense => `
+            <tr>
+                <td>${expense.date}</td>
+                <td>${expense.description}</td>
+                <td class="amount-negative">-${expense.amount.toLocaleString('tr-TR')} XLM</td>
+                <td><span class="badge badge-success">${expense.status}</span></td>
+                <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
+            </tr>
+        `).join('');
+        
+        console.log('Giderler güncellendi:', expenses);
+    }
+
+    // İSTATİSTİKLERİ GÜNCELLE
+    function updateStats() {
+        const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+        const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+        
+        const incomeStat = document.querySelector('.stat-card.income .stat-value');
+        const expenseStat = document.querySelector('.stat-card.expense .stat-value');
+        
+        if (incomeStat) {
+            incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+        }
+        if (expenseStat) {
+            expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+        }
+    }
+
+    // CÜZDAN EKLEME
+    function addWallet(event) {
+        event.preventDefault();
+        
+        const walletName = document.getElementById('walletName').value;
+        const publicKey = document.getElementById('walletPublicKey').value;
+        const partnershipRatio = parseFloat(document.getElementById('walletPartnershipRatio').value);
+        const accountType = document.getElementById('walletAccountType').value;
+        
+        const newWallet = {
+            id: Date.now(),
+            name: walletName,
+            publicKey: publicKey,
+            partnershipRatio: partnershipRatio,
+            accountType: accountType,
+            createdAt: new Date().toLocaleDateString('tr-TR')
+        };
+        
+        // wallets.push(newWallet);
+        renderWallets();
+        
+        document.getElementById('walletForm').reset();
+        closeModal('walletModal');
+        alert('Cüzdan başarıyla eklendi!');
+    }
+
+    // CÜZDANLARI GÖSTER
+    function renderWallets() {
+        const walletsList = document.getElementById('walletsList');
+        
+        if (!walletsList) return;
+        
+        if (wallets.length === 0) {
+            walletsList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">💳</div>
+                    <p>Henüz cüzdan eklenmemiş. İlk cüzdanınızı ekleyin!</p>
+                </div>
+            `;
+            return;
+        }
+        
+        walletsList.innerHTML = wallets.map(wallet => `
+        <br/>
+            <div class="partner-card">
+                <div class="partner-info">
+                    <div class="partner-avatar">${wallet.name.charAt(0).toUpperCase()}</div>
+                    <div class="partner-details">
+                        <h4>${wallet.name}</h4>
+                        <p>${wallet.publicKey}</p>
+                        <p style="font-size: 0.85rem; color: #999; margin-top: 0.3rem;">
+                            ${wallet.accountType === 'ana' ? '🏠 Ana Hesap' : '👥 Ortak Hesap'} | 
+                            Eklenme: ${wallet.createdAt}
+                        </p>
                     </div>
                 </div>
-            `).join('');
-        }
-          // Gelir ve Gider verilerini saklamak için array'ler
-          let incomes = [];
-        let expenses = [];
-
-        // localStorage'dan verileri yükle
-        function loadData() {
-            const savedIncomes = localStorage.getItem('incomes');
-            const savedExpenses = localStorage.getItem('expenses');
-            
-            if (savedIncomes) {
-                incomes = JSON.parse(savedIncomes);
-            }
-            if (savedExpenses) {
-                expenses = JSON.parse(savedExpenses);
-            }
-            
-            renderIncomes();
-            renderExpenses();
-            updateStats();
-        }
-
-        // Gelir ekleme fonksiyonu
-        function addIncome(event) {
-            event.preventDefault();
-            
-            const description = document.getElementById('incomeDescription').value;
-            const amount = parseFloat(document.getElementById('incomeAmount').value);
-            const date = document.getElementById('incomeDate').value;
-            
-            if (!description || !amount || !date) {
-                alert('Lütfen tüm alanları doldurun!');
-                return;
-            }
-            
-            const newIncome = {
-                id: Date.now(),
-                description: description,
-                amount: amount,
-                date: date,
-                status: 'Dağıtıldı',
-                createdAt: new Date().toLocaleDateString('tr-TR')
-            };
-            
-            incomes.push(newIncome);
-            localStorage.setItem('incomes', JSON.stringify(incomes));
-            
-            renderIncomes();
-            updateStats();
-            
-            document.getElementById('incomeForm').reset();
-            closeModal('incomeModal');
-            alert('Gelir başarıyla eklendi!');
-        }
-
-        // Gelirleri görüntüleme fonksiyonu
-        function renderIncomes() {
-            const mobileContainer = document.getElementById('incomeMobileCards');
-            const tableBody = document.getElementById('incomeTableBody');
-            
-            if (!mobileContainer || !tableBody) return;
-            
-            if (incomes.length === 0) {
-                mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
-                tableBody.innerHTML = '';
-                return;
-            }
-            
-            // Mobil kartlar
-            mobileContainer.innerHTML = incomes.map(income => `
-                <div class="mobile-card">
-                    <div class="mobile-card-row">
-                        <span class="mobile-card-label">Tarih</span>
-                        <span class="mobile-card-value">${income.date}</span>
-                    </div>
-                    <div class="mobile-card-row">
-                        <span class="mobile-card-label">Açıklama</span>
-                        <span class="mobile-card-value">${income.description}</span>
-                    </div>
-                    <div class="mobile-card-row">
-                        <span class="mobile-card-label">Miktar</span>
-                        <span class="mobile-card-value amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</span>
-                    </div>
-                    <div class="mobile-card-row">
-                        <span class="mobile-card-label">Durum</span>
-                        <span class="mobile-card-value"><span class="badge badge-success">${income.status}</span></span>
-                    </div>
+                <div class="partner-share">
+                    <div class="share-percentage">${wallet.partnershipRatio}%</div>
+                    <div class="share-tokens">Ortaklık Oranı</div>
                 </div>
-            `).join('');
-            
-            // Desktop tablo
-            tableBody.innerHTML = incomes.map(income => `
-                <tr>
-                    <td>${income.date}</td>
-                    <td>${income.description}</td>
-                    <td class="amount-positive">+${income.amount.toLocaleString('tr-TR')} XLM</td>
-                    <td><span class="badge badge-success">${income.status}</span></td>
-                    <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                </tr>
-            `).join('');
-        }
+            </div>
+        `).join('');
+    }
 
-        // İstatistikleri güncelleme fonksiyonu
-        function updateStats() {
-            const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
-            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-            
-            // İstatistik kartlarını güncelle
-            const incomeStat = document.querySelector('.stat-card.income .stat-value');
-            const expenseStat = document.querySelector('.stat-card.expense .stat-value');
-            
-            if (incomeStat) {
-                incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
-            }
-            if (expenseStat) {
-                expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
-            }
-        }
+    // MODAL İŞLEMLERİ
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+    }
 
-        // Sayfa yüklendiğinde verileri yükle
-        document.addEventListener('DOMContentLoaded', function() {
-            renderWallets();
-            loadData();
-        });
-        // Sayfa yüklendiğinde cüzdanları göster
-        document.addEventListener('DOMContentLoaded', function() {
-            renderWallets();
-        });
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+    // Modal dışına tıklanınca kapat
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('active');
         }
+    }
 
-        // Modal dışına tıklanınca kapat
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-            }
-        }
-    </script>
+    var walletss = {{ walletss | tojson | safe }};
+   console.log("Wallets:", walletss);
+    const ana = walletss.find(w => w.name === "Ana Hesap");
+    document.getElementById("anaKey").textContent = ana.publicKey;
+    document.getElementsByClassName("wallet-amount")[0].textContent = ana.balance + " XLM";
+    const kisiSayisi = walletss.length - 1;
+console.log("kisiSayisi: " + kisiSayisi)
+document.getElementById("kisiCount").textContent = kisiSayisi;
+
+// ANA HESABI AYIKLA
+const partners = walletss.filter(w => w.name !== "Ana Hesap");
+
+// PARTNER KARTLARINI BAS
+const container = document.getElementById("partners");
+
+partners.forEach(p => {
+    const card = `
+        <div class="partner-card">
+            <div class="partner-info">
+                <div class="partner-avatar">${p.name.substring(0,2).toUpperCase()}</div>
+                <div class="partner-details">
+                    <h4>${p.name}</h4>
+                    <p>${p.publicKey.substring(0,5)}...${p.publicKey.slice(-4)}</p>
+                </div>
+            </div>
+            <div class="partner-share">
+                <div class="share-percentage">${p.partnershipRatio}</div>
+                <div class="share-tokens">–</div>
+            </div>
+            <div class="partner-stats">
+                <div class="partner-stat">
+                    <div class="partner-stat-label">Kişi Başı Gelir</div>
+                    <div class="partner-stat-value positive">+${Number(p.balance).toFixed(2)} XLM</div>
+                </div>
+                <div class="partner-stat">
+                    <div class="partner-stat-label">Kişi Başı Borç</div>
+                    <div class="partner-stat-value negative">-0 XLM</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML += card;
+});
+
+
+</script>
 </body>
 </html>
