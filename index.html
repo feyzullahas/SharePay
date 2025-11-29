@@ -500,7 +500,7 @@
         .partner-share {
             text-align: right;
         }
-
+        
         .share-percentage {
             font-size: 1.5rem;
             font-weight: bold;
@@ -936,7 +936,7 @@
             </div>
 
             <!-- Desktop İçin -->
-            <div class="table-container" style="display: none;">
+            <div class="table-container" id="incomeTableContainer" style="display: none;">
                 <div class="transaction-item income">
                     <div style="display: flex; align-items: center; flex: 1;">
                         <div class="transaction-icon income">↓</div>
@@ -1044,22 +1044,22 @@
             <!-- Mobil Kartlar -->
             <div id="incomeMobileCards"></div>
 
-            <!-- Desktop Tablo -->
-            <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tarih</th>
-                        <th>Açıklama</th>
-                        <th>Miktar</th>
-                        <th>Durum</th>
-                        <th>İşlem</th>
-                    </tr>
-                </thead>
-                <tbody id="incomeTableBody">
-                </tbody>
-            </table>
-            </div>
+                 <!-- Desktop Tablo -->
+                 <div class="table-container" id="incomeTableContainer" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Açıklama</th>
+                                <th>Miktar</th>
+                                <th>Durum</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeTableBody">
+                        </tbody>
+                    </table>
+                    </div>
         </div>
 
         <div class="section">
@@ -1839,17 +1839,23 @@
         }
 
         // Gelirleri görüntüleme fonksiyonu
+        
         function renderIncomes() {
             const mobileContainer = document.getElementById('incomeMobileCards');
             const tableBody = document.getElementById('incomeTableBody');
+            const tableContainer = document.getElementById('incomeTableContainer');
             
-            if (!mobileContainer || !tableBody) return;
+            if (!mobileContainer || !tableBody || !tableContainer) return;
             
             if (incomes.length === 0) {
                 mobileContainer.innerHTML = '<div class="empty-state"><p>Henüz gelir eklenmemiş.</p></div>';
                 tableBody.innerHTML = '';
+                tableContainer.style.display = 'none';  // Tabloyu gizle
                 return;
             }
+            
+            // Tabloyu göster
+            tableContainer.style.setProperty('display', 'block', 'important');
             
             // Mobil kartlar
             mobileContainer.innerHTML = incomes.map(income => `
@@ -1884,8 +1890,6 @@
                 </tr>
             `).join('');
         }
-
-        // İstatistikleri güncelleme fonksiyonu
         function updateStats() {
             const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
             const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
