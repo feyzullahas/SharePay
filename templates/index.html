@@ -843,9 +843,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo"><img src="../Logo/logo.jpg" alt="SharePay" style="width: 50px; height: 50px; border-radius: 12px; vertical-align: middle; object-fit: cover;"> SharePay</div>
+        <div class="logo"><img src="/static/logo.jpg" alt="SharePay" style="width: 50px; height: 50px; border-radius: 12px; vertical-align: middle; object-fit: cover;"> SharePay</div>
         <div class="user-info">
-            <span>İşletme: Teknoloji A.Ş.</span>
+            <span></span>
             <span class="wallet-address">GDZX...7K2M</span>
         </div>
     </nav>
@@ -867,17 +867,11 @@
             <div class="wallet-balance">
                 <div class="wallet-label">Toplam Bakiye</div>
                 <div class="wallet-amount"></div>
-                <p style="opacity: 0.8; margin-top: 0.5rem;">≈ $4,024.50 USD</p>
+                <p style="opacity: 0.8; margin-top: 0.5rem;" id="tlAmount"></p>
             </div>
             <div class="wallet-actions">
-                <button class="wallet-btn" onclick="openModal('depositModal')">
-                    ⬇️ Para Yatır
-                </button>
-                <button class="wallet-btn" onclick="openModal('withdrawModal')">
-                    ⬆️ Para Çek
-                </button>
-                <button class="wallet-btn" onclick="openModal('transferModal')">
-                    🔄 Transfer
+                <button class="wallet-btn" id="transferBtn">
+                    🔄 Bölüştür
                 </button>
             </div>
         </div>
@@ -885,15 +879,15 @@
         <div class="dashboard-grid">
             <div class="stat-card income">
                 <div class="stat-label">Toplam Gelir</div>
-                <div class="stat-value">17,500<span class="stat-currency">XLM</span></div>
+                <div class="stat-value">32500,00<span class="stat-currency">XLM</span></div>
             </div>
             <div class="stat-card expense">
                 <div class="stat-label">Toplam Gider</div>
-                <div class="stat-value">3,650<span class="stat-currency">XLM</span></div>
+                <div class="stat-value">162,50<span class="stat-currency">XLM</span></div>
             </div>
             <div class="stat-card debt">
                 <div class="stat-label">Aktif Borçlar</div>
-                <div class="stat-value">12,000<span class="stat-currency">XLM</span></div>
+                <div class="stat-value">520,00<span class="stat-currency">XLM</span></div>
             </div>
             <div class="stat-card partners">
                 <div class="stat-label">Ortak Sayısı</div>
@@ -941,7 +935,7 @@
             </div>
 
             <!-- Desktop İçin -->
-            <div class="table-container" id="incomeTableContainer" style="display: none;">
+            <!-- <div class="table-container" id="incomeTableContainer" style="display: none;">
                 <div class="transaction-item income">
                     <div style="display: flex; align-items: center; flex: 1;">
                         <div class="transaction-icon income">↓</div>
@@ -963,20 +957,20 @@
                     </div>
                     <div class="transaction-amount amount-positive">+5,000 XLM</div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- Faturalar -->
         <div class="section">
             <div class="section-header">
-                <h2 class="section-title">🧾 Faturalar</h2>
-                <button class="btn btn-primary" onclick="openModal('invoiceModal')">+ Yeni Fatura</button>
+                <h2 class="section-title">💸 Giderler</h2>
+                <button class="btn btn-primary" onclick="openModal('invoiceModal')">+ Yeni Ödeme</button>
             </div>
 
             <div class="invoice-card">
                 <div class="invoice-header">
                     <div>
-                        <div class="invoice-number">#INV-2025-001</div>
+                        <div class="invoice-number">#GDR-2025-001</div>
                         <div class="invoice-date">Düzenleme: 25.11.2025</div>
                     </div>
                     <span class="badge badge-success">Ödendi</span>
@@ -1008,10 +1002,10 @@
             <div class="invoice-card">
                 <div class="invoice-header">
                     <div>
-                        <div class="invoice-number">#INV-2025-002</div>
+                        <div class="invoice-number">#GDR-2025-002</div>
                         <div class="invoice-date">Düzenleme: 20.11.2025</div>
                     </div>
-                    <span class="badge badge-pending">Beklemede</span>
+                    <span class="badge badge-pending" id="mevcutFatura">Beklemede</span>
                 </div>
                 <div class="invoice-body">
                     <div class="invoice-row">
@@ -1029,12 +1023,12 @@
                 </div>
                 <div class="invoice-total">
                     <span>Toplam Tutar:</span>
-                    <span>5,000 XLM</span>
+                    <span>150,00 XLM</span>
                 </div>
                 <div class="invoice-actions">
                     <button class="btn btn-primary btn-small">PDF İndir</button>
                     <button class="btn btn-primary btn-small">Detay</button>
-                    <button class="btn btn-success btn-small">Ödendi İşaretle</button>
+                    <button class="btn btn-success btn-small" id="withdrawModal">Öde</button>
                 </div>
             </div>
         </div>
@@ -1067,88 +1061,6 @@
                     </div>
         </div>
 
-        <div class="section">
-            <div class="section-header">
-                <h2 class="section-title">💸 Giderler</h2>
-                <button class="btn btn-danger" onclick="openModal('expenseModal')">+ Yeni Gider Ekle</button>
-            </div>
-
-            <!-- Mobil Kartlar -->
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">27.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Ofis Kirası</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-negative">-3,200 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">Ödendi</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Detay Görüntüle</button>
-                </div>
-            </div>
-
-            <div class="mobile-card">
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Tarih</span>
-                    <span class="mobile-card-value">26.11.2025</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Açıklama</span>
-                    <span class="mobile-card-value">Elektrik Faturası</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Miktar</span>
-                    <span class="mobile-card-value amount-negative">-450 XLM</span>
-                </div>
-                <div class="mobile-card-row">
-                    <span class="mobile-card-label">Durum</span>
-                    <span class="mobile-card-value"><span class="badge badge-success">Ödendi</span></span>
-                </div>
-                <div class="mobile-card-actions">
-                    <button class="btn btn-primary">Detay Görüntüle</button>
-                </div>
-            </div>
-
-            <!-- Desktop Tablo -->
-            <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tarih</th>
-                        <th>Açıklama</th>
-                        <th>Miktar</th>
-                        <th>Durum</th>
-                        <th>İşlem</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>27.11.2025</td>
-                        <td>Ofis Kirası</td>
-                        <td class="amount-negative">-3,200 XLM</td>
-                        <td><span class="badge badge-success">Ödendi</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
-                    <tr>
-                        <td>26.11.2025</td>
-                        <td>Elektrik Faturası</td>
-                        <td class="amount-negative">-450 XLM</td>
-                        <td><span class="badge badge-success">Ödendi</span></td>
-                        <td><button class="btn btn-primary" style="padding: 0.4rem 1rem;">Detay</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
 
         <div class="section">
             <div class="section-header">
@@ -1254,16 +1166,6 @@
             <div id="partners"></div>
 
 
-        </div>
-        <div class="section">
-            <div class="section-header">
-                <h2 class="section-title">💳 Cüzdanlar</h2>
-                <button class="btn btn-primary" onclick="openModal('walletModal')">+ Yeni Cüzdan Ekle</button>
-            </div>
-            
-            <div id="walletsList">
-                <!-- Cüzdanlar buraya dinamik olarak eklenecek -->
-            </div>
         </div>
     </div>
     
@@ -1722,7 +1624,6 @@
         }
         function updateStats() {
             const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
-            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
             
             // İstatistik kartlarını güncelle
             const incomeStat = document.querySelector('.stat-card.income .stat-value');
@@ -1732,7 +1633,7 @@
                 incomeStat.innerHTML = `${totalIncome.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
             }
             if (expenseStat) {
-                expenseStat.innerHTML = `${totalExpense.toLocaleString('tr-TR')}<span class="stat-currency">XLM</span>`;
+                expenseStat.innerHTML = `7,500<span class="stat-currency">XLM</span>`;
             }
         }
 
@@ -1761,6 +1662,12 @@
         closeModal('walletModal');
         alert('Cüzdan başarıyla eklendi!');
     }
+
+    async function convertXLMtoTL(xlmAmount) {
+    const res = await fetch(`/api/xlm-to-tl/${xlmAmount}`);
+    const data = await res.json();
+    return data.tl;
+}
 
     // CÜZDANLARI GÖSTER
     function renderWallets() {
@@ -1793,7 +1700,7 @@
                     </div>
                 </div>
                 <div class="partner-share">
-                    <div class="share-percentage">${wallet.partnershipRatio}%</div>
+                    <div class="share-percentage">${wallet.partnershipRatio}</div>
                     <div class="share-tokens">Ortaklık Oranı</div>
                 </div>
             </div>
@@ -1819,19 +1726,27 @@
     var walletss = {{ walletss | tojson | safe }};
    console.log("Wallets:", walletss);
     const ana = walletss.find(w => w.name === "Ana Hesap");
+    const invoice = walletss.find(w => w.name === "Faturalar");
     document.getElementById("anaKey").textContent = ana.publicKey;
-    document.getElementsByClassName("wallet-amount")[0].textContent = ana.balance + " XLM";
-    const kisiSayisi = walletss.length - 1;
+const formattedBalance = parseFloat(ana.balance).toLocaleString('tr-TR', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 7
+});
+
+document.getElementsByClassName("wallet-amount")[0].textContent = formattedBalance + " XLM";
+    const kisiSayisi = walletss.length - 2;
 console.log("kisiSayisi: " + kisiSayisi)
 document.getElementById("kisiCount").textContent = kisiSayisi;
 
 // ANA HESABI AYIKLA
-const partners = walletss.filter(w => w.name !== "Ana Hesap");
+const partners = walletss.filter(w => w.name !== "Ana Hesap" && w.name !== "Faturalar");
 
 // PARTNER KARTLARINI BAS
 const container = document.getElementById("partners");
 
 partners.forEach(p => {
+    let shareAmount = (ana.balance * p.partnershipRatio / 100);
+
     const card = `
         <div class="partner-card">
             <div class="partner-info">
@@ -1842,16 +1757,16 @@ partners.forEach(p => {
                 </div>
             </div>
             <div class="partner-share">
-                <div class="share-percentage">${p.partnershipRatio}</div>
-                <div class="share-tokens">–</div>
+                <div class="share-percentage">%${p.partnershipRatio}</div>
+                <div class="share-tokens">${shareAmount} token</div>
             </div>
             <div class="partner-stats">
                 <div class="partner-stat">
-                    <div class="partner-stat-label">Kişi Başı Gelir</div>
+                    <div class="partner-stat-label">Bakiye</div>
                     <div class="partner-stat-value positive">+${Number(p.balance).toFixed(2)} XLM</div>
                 </div>
                 <div class="partner-stat">
-                    <div class="partner-stat-label">Kişi Başı Borç</div>
+                    <div class="partner-stat-label">Borç</div>
                     <div class="partner-stat-value negative">-0 XLM</div>
                 </div>
             </div>
@@ -1861,7 +1776,138 @@ partners.forEach(p => {
     container.innerHTML += card;
 });
 
+document.getElementById("withdrawModal").addEventListener("click", async () => {
+    const faturaAmount = 150; // Ödenecek fatura miktarı
+    const loadingText = document.getElementById("withdrawModal");
+    loadingText.style.display = "inline";
+    // Ana Hesap hariç partnerleri alıyoruz
+    const partners = walletss.filter(w => w.name !== "Ana Hesap" && w.name !== "Faturalar");
 
+    // Her partnerin fatura payını hesapla
+    const members = partners.map(p => ({
+        name: p.name,
+        publicKey: p.publicKey,
+        shareAmount: +(faturaAmount * p.partnershipRatio / 100).toFixed(7)
+    }));
+
+    try {
+        const res = await fetch("/indistribute", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ members })
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+            alert(" ödendi! Miktarlar konsolda:");
+            console.log("Distribution:", data.distribution);
+            console.log("Balances:", data.balances);
+            // Fatura durumu güncelleme
+            
+const faturaBadge = document.getElementById("mevcutFatura");
+if(faturaBadge){
+    faturaBadge.textContent = "Ödendi";              // Texti değiştir
+    faturaBadge.classList.remove("badge-pending");   // badge-pending sınıfını kaldır
+    faturaBadge.classList.add("badge-success");     // badge-success sınıfını ekle
+}
+            // Partner kart bakiyelerini güncelle
+            data.balances.forEach(b => {
+                const pCard = Array.from(document.querySelectorAll(".partner-card")).find(c =>
+                    c.querySelector(".partner-details h4").textContent === b.name
+                );
+                if(pCard){
+                    pCard.querySelector(".share-tokens").textContent = b.balance.toFixed(7) + " XLM";
+                }
+            });
+             // Sayfa yenilemeden backend’den güncel walletss verisini al
+             const walletRes = await fetch("/api/wallets");
+            const updatedWallets = await walletRes.json();
+
+            console.log("Güncel walletss:", updatedWallets);
+            // Burada dilersen DOM'u updatedWallets ile yeniden güncelleyebilirsin
+
+            // Faturalar hesabının bakiyesi de güncellenebilir
+            const invoiceCard = Array.from(document.querySelectorAll(".partner-card")).find(c =>
+                c.querySelector(".partner-details h4").textContent === "Faturalar"
+            );
+            if(invoiceCard){
+                const invoiceBalance = data.balances.find(b => b.name === "Faturalar").balance;
+                invoiceCard.querySelector(".share-tokens").textContent = invoiceBalance.toFixed(7) + " XLM";
+            }
+            renderWallets();
+        } else {
+            alert(" ödeme hatası: " + data.error);
+        }
+
+    } catch(e){
+        console.error(e);
+        alert(" ödeme sırasında bir hata oluştu!");
+    }finally {
+        // Loading yazısını gizle
+        loadingText.style.display = "none";
+    }
+});
+
+    async function updateTL() {
+        debugger;
+        try {
+            const amount = 10000.00; // XLM miktarı
+            const res = await fetch(`/api/xlm-to-try/${amount}`);
+            const data = await res.json();
+            console.log("data: " + data)
+            if(data.try) {
+                document.getElementById("tlAmount").textContent = "≈ ₺" + data.try.toLocaleString();
+            } else {
+                console.error("TL fetch hatası:", data.error);
+            }
+        } catch(e) {
+            console.error("TL fetch hatası:", e);
+        }
+    }
+window.addEventListener("DOMContentLoaded", async () => {
+
+    updateTL();
+});
+
+document.getElementById("transferBtn").addEventListener("click", async () => {
+            const members = partners.map(p => ({
+                name: p.name,
+                publicKey: p.publicKey,
+                share: p.partnershipRatio
+            }));
+
+            try {
+                const res = await fetch("/distribute", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ members })
+                });
+
+                const data = await res.json();
+
+                if(res.ok){
+                    alert("Transfer başarılı! Gönderilen miktarlar konsolda:");
+                    console.log("Distribution:", data.distribution);
+                    console.log("Balances:", data.balances);
+
+                    // Partner kartlarını güncelle
+                    data.balances.forEach(b => {
+                        const pCard = Array.from(document.querySelectorAll(".partner-card")).find(c =>
+                            c.querySelector(".partner-details h4").textContent === b.name
+                        );
+                        if(pCard){
+                            pCard.querySelector(".share-tokens").textContent = b.balance.toFixed(7) + " XLM";
+                        }
+                    });
+                } else {
+                    alert("Transfer hatası: " + data.error);
+                }
+            } catch(e){
+                console.error(e);
+                alert("Transfer sırasında bir hata oluştu!");
+            }
+        });
 </script>
 </body>
 </html>
